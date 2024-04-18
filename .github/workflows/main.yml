@@ -18,19 +18,19 @@ jobs:
     - name: 'Terraform init'
       id: init
       run: |
-        cd ./terraform/main.tf
+        cd terraform/main.tf
         terraform init          
 
     - name: 'Terraform plan'
       id: plan
       run: |
-        cd ./terraform/main.tf
+        cd terraform/main.tf
         terraform plan
                   
     - name: 'Terraform apply'
       id: apply
       run: |
-        cd ./terraform/main.tf
+        cd terraform/main.tf
         terraform apply -auto-approve          
 
     - name: Upload File to Storage Account
