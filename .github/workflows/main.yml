@@ -15,36 +15,14 @@ permissions:
   
 # Allows you to run this workflow manually from the Actions tab
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
-      - name: Azure Login
-        uses: Azure/login@v2.1.0
+      - name: Log in with Azure
+        uses: azure/login@v1
         with:
-          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          # ClientId of the Azure Service principal created.
-          client-id: d222a75b-4d2c-4b7d-9d30-4f9b6179ba12
-          # TenantId of the Azure Service principal created.
-          tenant-id: 9c5415c5-8135-4169-b782-ff984b4201e9
-          # Azure subscriptionId
-          subscription-id: a3b6104a-108b-48ff-8fbf-1b75247bd0cc
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
