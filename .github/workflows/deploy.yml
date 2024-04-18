@@ -5,6 +5,13 @@ name: AzureLoginSample
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUB_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      
     steps:
       - name: Azure Login
         uses: azure/login@v1
