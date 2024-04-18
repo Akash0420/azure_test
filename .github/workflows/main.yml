@@ -12,5 +12,5 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
-    - run: |
-        az webapp list --query "[?state=='Running']"
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v1
