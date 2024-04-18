@@ -10,17 +10,20 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
       
       - name: Run Terraform Init
-        run: |
-          cd terraform
-          terraform init
+        run: terraform init
    
-      - name: Run Terraform Apply
-        run: |
-          cd terraform
-          terraform apply -auto-approve
+      - name: Run Terraform Plan
+        run: terraform plan
 
-      - name: Upload File to Storage
-        run: |
-          az storage blob upload --account-name examplestorageaccount --container-name mycontainer --file text.txt --name text.txt
+      - name: Run Terraform Apply
+        run: terraform apply -auto-approve
+
+  #    - name: Upload File to Storage
+  #     run: |
+  #        az storage blob upload --account-name examplestorageaccount --container-name mycontainer --file text.txt --name text.txt
