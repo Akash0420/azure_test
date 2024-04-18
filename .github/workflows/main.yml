@@ -35,17 +35,17 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      #- name: Azure Login
-      #  uses: Azure/login@v2.1.0
-       # with:
+      - name: Azure Login
+        uses: Azure/login@v2.1.0
+        with:
     # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-       #creds: # optional
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
     # ClientId of the Azure Service principal created.
-        #     client-id: # optional
+         client-id: d222a75b-4d2c-4b7d-9d30-4f9b6179ba12
     # TenantId of the Azure Service principal created.
-         #    tenant-id: # optional
+         tenant-id: 9c5415c5-8135-4169-b782-ff984b4201e9
     # Azure subscriptionId
-          #   subscription-id: # optional
+         subscription-id: a3b6104a-108b-48ff-8fbf-1b75247bd0cc
     # Set this value to true to enable Azure PowerShell Login in addition to Azure CLI login
     #         enable-AzPSSession: # optional
     # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
