@@ -1,24 +1,31 @@
+# Configure Azure Provider
 provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
+# Resource Group
+resource "azurerm_resource_group" "rg" {
+  name     = "github-actions-rg"
   location = "centralindia"
 }
 
-resource "azurerm_storage_account" "example" {
-  name                     = "examplestorageaccount"
-  resource_group_name      = azurerm_resource_group.example.name
-  location                 = azurerm_resource_group.example.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-
-  tags = {
-    environment = "production"
-  }
+# Service Principal for Access
+data "azurerm_client_secret" "sp" {
+  name = "tmp"
 }
 
-output "storage_account_id" {
-  value = azurerm_storage_account.example.id
+# Storage Account
+resource "azurerm_storage_account" "storage" {
+  name                = "githubactionstorage"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  account_tier        = "Standard_LRS"
+  account_replication_type = "LRS"
+
+  # Access for Service Principal
+  access_tier = "Hot"
+
+  timeouts {
+    create = "10m"
+  }
 }

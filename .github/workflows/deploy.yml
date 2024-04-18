@@ -1,0 +1,27 @@
+on: [push]
+
+name: AzureLoginSample
+
+jobs:
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+     # Apply Terraform Configuration
+    - name: Run Terraform Init
+      run: |
+       terraform init
+   
+    - name: Run Terraform Apply
+      run: |
+       terraform apply -auto-approve
+
+   # Upload File (Modify path and content as needed)
+    - name: Upload File to Storage
+      run: |
+        az storage blob upload --account-name examplestorageaccount --container-name mycontainer --file .\text.txt --name text.txt
