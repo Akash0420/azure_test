@@ -3,7 +3,7 @@ on: [push]
 name: AzureLoginSample
 
 jobs:
-  build-and-deploy:
+  terraform:
     runs-on: ubuntu-latest
 
     env:
@@ -11,12 +11,12 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUB_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      
+
     steps:
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    #  - name: Azure Login
+     #   uses: azure/login@v1
+      #  with:
+      #    creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     
       - name: Setup Terraform
