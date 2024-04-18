@@ -26,4 +26,4 @@ jobs:
 
     - name: Upload File to Storage Account
       run: |
-        az storage blob upload --account-name examplestorageaccount --container-name mycontainer --file path/to/local/file.txt --name myfile.txt
+        az storage blob upload --account-name examplestorageaccount --container-name mycontainer --file .\text.txt --name text.txt
